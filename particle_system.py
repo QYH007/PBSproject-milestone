@@ -2,6 +2,7 @@ import taichi as ti
 import numpy as np
 import trimesh as tm
 import WCSPH
+import PBF
 
 
 @ti.data_oriented
@@ -46,7 +47,7 @@ class ParticleSystem:
 
         self.total_rigid_particle_num = 0
         self.mesh_vertices = []
-        self.mesh_indices = []
+        self.mesh_indices = [] 
 
         for rigid_body in self.rigidBodiesConfig:
             voxelized_points = self.load_rigid_body(rigid_body)
@@ -58,6 +59,7 @@ class ParticleSystem:
             self.cur_obj_id = ti.max(self.cur_obj_id, rigid_body['objectId'])
 
         self.total_particle_num = self.total_rigid_particle_num + self.total_fluid_particle_num
+        print(self.total_fluid_particle_num)
 
         self.position = ti.Vector.field(self.dim, dtype=ti.f32, shape=self.total_particle_num)
         self.color = ti.Vector.field(3, dtype=ti.f32, shape=self.total_particle_num)
@@ -333,7 +335,7 @@ class ParticleSystem:
         dim_array = []
         total_cube_particle_num = 1
         for i in range(self.dim):
-            dim_array.append(np.arange(box_start[i], box_end[i], self.particle_diameter))
+            dim_array.append(np.arange(box_start[i], box_end[i], self.particle_diameter+0.45))
             total_cube_particle_num *= len(dim_array[i])
         position_arr = np.array(np.meshgrid(*dim_array, indexing='ij'), dtype=np.float32)
         # (3, len(dim_array[0]), len(dim_array[1]), len(dim_array[2]))
@@ -458,6 +460,12 @@ class ParticleSystem:
 
     def build_solver(self):
         return WCSPH.WCSPHSolver(self)
+        # return PBF.PBFSolver(self)
+    
+    def build_solver2(self):
+        # return WCSPH.WCSPHSolver(self)
+        return PBF.PBFSolver(self)
+
 
     def reset_particle_system(self):
         self.memory_allocated_particle_num[None] = 0

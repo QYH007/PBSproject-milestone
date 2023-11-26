@@ -2,8 +2,8 @@
 	"Configuration": 
 	{
         "domainStart": [0.0, 0.0, 0.0],
-        "domainEnd": [5.0, 3.0, 2.0],
-		"particleRadius": 0.01,
+        "domainEnd": [40.0, 40.0, 40.0],
+		"particleRadius": 0.15,
 		"numberOfStepsPerRenderUpdate": 1,
 		"density0": 1000, 
 		"simulationMethod": 0,
@@ -35,11 +35,13 @@
 	"FluidBlocks": [
 		{
             "objectId": 0,
-			"start": [0.3, 0.1, 0.7],
-			"end": [1.4, 2.9, 1.8],
+			"start": [17, 15, 25],
+			"end": [33, 30, 37],
+			"start1": [1.38, 2.88, 1.78],
+			"end1": [1.4, 2.9, 1.8],
 			"translation": [0.0, 0.0, 0.0],
 			"scale": [1, 1, 1],
-			"velocity": [0.0, -1.0, 0.0],
+			"velocity": [0.0, 0.0, 0.0],
 			"density": 1000.0,
 			"color": [50, 100, 200]
 		}

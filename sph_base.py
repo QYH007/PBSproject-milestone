@@ -107,13 +107,15 @@ class SPHBase:
                     self.simulate_collision(i, collision_vec / collision_vec_normal)
 
     def initialize(self):
-        self.ps.update_particle_system()
-        self.compute_volume_of_boundary_particle()
+        True
+        # self.ps.update_particle_system()
+        # self.compute_volume_of_boundary_particle()
+
 
     def substep(self):
         pass
 
     def step(self):
-        self.ps.update_particle_system()
+        # self.ps.update_particle_system()
         self.substep()
-        self.enforce_boundary_3D()
+        # self.enforce_boundary_3D()
